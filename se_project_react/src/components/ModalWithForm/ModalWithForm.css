@@ -1,0 +1,128 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: CabinetGrotesk, sans-serif;
+  visibility: hidden;
+}
+
+.modal__opened {
+  visibility: visible;
+}
+
+.modal__content {
+  position: relative;
+  width: 100%;
+  max-width: 496px;
+  max-height: 436px;
+  padding: 28px 28px 36px;
+  background-color: #fff;
+  border-radius: 20px;
+  box-sizing: border-box;
+}
+
+.modal__content_type_image {
+  max-width: 498px;
+  max-height: 610px;
+  padding: 0;
+  border-radius: 16px;
+}
+
+.modal__image {
+  width: 100%;
+  max-width: 498px;
+  height: 100%;
+  max-height: 498px;
+  object-fit: cover;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.modal__title {
+  margin: 0 0 24px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.modal__caption,
+.modal__weather {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  margin-left: 32px;
+}
+
+.modal__caption {
+  margin-top: 20px;
+}
+
+.modal__weather {
+  margin-top: 12px;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: transparent url("../../assets/close-icon.svg") center/contain
+    no-repeat;
+}
+
+.modal__close:hover {
+  cursor: pointer;
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal__label {
+  margin-bottom: 24px;
+}
+
+.modal__input {
+  width: 100%;
+  max-width: 440px;
+  margin-top: 8px;
+  border: 1px solid #000;
+}
+
+.modal__radio-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 173px;
+  max-height: 108px;
+  border: none;
+  padding: 0;
+}
+
+.modal__legend {
+  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.modal__label_type_radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.modal__submit {
+  width: 100%;
+  max-width: 124px;
+  height: 36px;
+  margin: 32px 0 36px;
+}

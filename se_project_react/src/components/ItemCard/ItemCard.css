@@ -1,0 +1,38 @@
+.card {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 323px;
+  font-family: CabinetGrotesk, sans-serif;
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 72px;
+  height: 24px;
+  margin: 0;
+  padding: 4px 8px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.card__image {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.card__image:hover {
+  cursor: pointer;
+}
+
+.cards__text {
+  font-family: CabinetGrotesk, sans-serif;
+}
