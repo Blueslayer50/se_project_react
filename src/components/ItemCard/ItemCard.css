@@ -16,9 +16,12 @@
   height: 24px;
   margin: 0;
   padding: 4px 8px;
-  font-size: 16px;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-weight: 700;
+  font-size: 16px;
   line-height: 20px;
+  letter-spacing: 0%;
+  color: #00000099;
   background-color: #fff;
   border-radius: 4px;
 }
@@ -34,5 +37,10 @@
 }
 
 .cards__text {
-  font-family: CabinetGrotesk, sans-serif;
+  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
+  margin: 40px 0 34px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
 }

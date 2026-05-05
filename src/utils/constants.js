@@ -1,3 +1,17 @@
+export const conditionMap = {
+  cloudy: "clouds",
+  fog: "mist",
+  storm: "thunderstorm",
+  mist: "mist",
+  haze: "mist",
+  smoke: "mist",
+  dust: "mist",
+  sand: "mist",
+  ash: "mist",
+  squall: "thunderstorm",
+  tornado: "thunderstorm",
+};
+
 export const weatherOptions = [
   {
     day: true,
@@ -6,7 +20,7 @@ export const weatherOptions = [
   },
   {
     day: true,
-    condition: "cloudy",
+    condition: "clouds",
     url: new URL("../assets/day/cloudy.png", import.meta.url).href,
   },
   {
@@ -16,7 +30,7 @@ export const weatherOptions = [
   },
   {
     day: true,
-    condition: "fog",
+    condition: "mist",
     url: new URL("../assets/day/Fog.png", import.meta.url).href,
   },
   {
@@ -26,7 +40,7 @@ export const weatherOptions = [
   },
   {
     day: true,
-    condition: "storm",
+    condition: "thunderstorm",
     url: new URL("../assets/day/Storm.png", import.meta.url).href,
   },
   {
@@ -36,28 +50,28 @@ export const weatherOptions = [
   },
   {
     day: false,
-    condition: "cloudy",
-    url: new URL("../assets/night/cloudy-night.png", import.meta.url).href,
+    condition: "clouds",
+    url: new URL("../assets/night/cloudy.png", import.meta.url).href,
   },
   {
     day: false,
     condition: "rain",
-    url: new URL("../assets/night/rain-night.png", import.meta.url).href,
+    url: new URL("../assets/night/Rain-night.png", import.meta.url).href,
   },
   {
     day: false,
     condition: "snow",
-    url: new URL("../assets/night/snow-night.png", import.meta.url).href,
+    url: new URL("../assets/night/Snow-night.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "fog",
-    url: new URL("../assets/night/fog-night.png", import.meta.url).href,
+    condition: "mist",
+    url: new URL("../assets/night/Fog-night.png", import.meta.url).href,
   },
   {
     day: false,
-    condition: "storm",
-    url: new URL("../assets/night/stormy-night.png", import.meta.url).href,
+    condition: "thunderstorm",
+    url: new URL("../assets/night/Stormy-night.png", import.meta.url).href,
   },
 ];
 
@@ -170,6 +184,7 @@ export const defaultClothingItems = [
 ];
 
 export const apiKey = "b57c1f646492714f38e8b0cdd42d89ce";
+
 export const coordinates = {
   latitude: 42.75,
   longitude: 75.77,
