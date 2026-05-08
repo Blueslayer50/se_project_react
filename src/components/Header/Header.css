@@ -4,6 +4,7 @@
   padding: 32px 0 28px;
   font-family: "CabinetGrotesk-Medium", sans-serif;
   margin: 0;
+  gap: 24px;
 }
 
 .header__logo {
@@ -19,9 +20,15 @@
   letter-spacing: 0%;
 }
 
+.header__right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .header__add-clothes-button {
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-  margin: 0 20px 0 auto;
   border: none;
   cursor: pointer;
   background: none;

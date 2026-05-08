@@ -26,11 +26,16 @@
   transition: left 0.3s ease;
 }
 
+.toggle-switch__checkbox:checked + .toggle-switch__circle {
+  left: 28px;
+}
+
 .toggle-switch__text {
   position: absolute;
   top: 5px;
   font-size: 14px;
   color: grey;
+  transition: color 0.3s ease;
 }
 
 .toggle-switch__text_F {
@@ -39,10 +44,6 @@
 
 .toggle-switch__text_C {
   right: 9px;
-}
-
-.toggle-switch__checkbox:checked + .toggle-switch__circle {
-  left: 28px;
 }
 
 .toggle-switch__checkbox:not(:checked) ~ .toggle-switch__text_F {
