@@ -4,8 +4,16 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const handleServerResponse = (res) => {
-  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+const handleServerResponse = async (res) => {
+  if (!res.ok) {
+    return Promise.reject(`Error: ${res.status}`);
+  }
+
+  try {
+    return await res.json();
+  } catch {
+    return {};
+  }
 };
 
 export const getItems = () => {

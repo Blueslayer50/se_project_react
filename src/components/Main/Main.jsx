@@ -27,7 +27,7 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
         <ul className="cards__list">
           {filteredItems.map((item) => (
             <ItemCard
-              key={`item-${item._id}`}
+              key={`item-${item.id ?? crypto.randomUUID()}`}
               item={item}
               onCardClick={handleCardClick}
             />

@@ -1,7 +1,7 @@
 import "./ItemModal.css";
 
 function ItemModal({ activeModal, onClose, card, onDeleteClick }) {
-  if (!card || !card._id) return null;
+  if (!card || !card.id) return null;
 
   const isOpen = activeModal === "preview";
 

@@ -26,9 +26,10 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
     >
-      <label htmlFor="name" className="modal__label">
+      <label htmlFor="item-name" className="modal__label">
         Name
         <input
+          id="item-name"
           type="text"
           className="modal__input"
           name="name"
@@ -40,9 +41,10 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
         />
       </label>
 
-      <label htmlFor="imageUrl" className="modal__label">
+      <label htmlFor="item-image" className="modal__label">
         Image
         <input
+          id="item-image"
           type="url"
           className="modal__input"
           name="imageUrl"
@@ -56,9 +58,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       <fieldset className="modal__radio-button">
         <legend className="modal__legend">Select the weather type:</legend>
 
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="weather-hot"
+          className="modal__label modal__label_type_radio"
+        >
           <input
-            id="hot"
+            id="weather-hot"
             type="radio"
             name="weather"
             checked={values.weather === "hot"}
@@ -70,9 +75,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           Hot
         </label>
 
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="weather-warm"
+          className="modal__label modal__label_type_radio"
+        >
           <input
-            id="warm"
+            id="weather-warm"
             type="radio"
             name="weather"
             checked={values.weather === "warm"}
@@ -83,9 +91,12 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
           Warm
         </label>
 
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
+        <label
+          htmlFor="weather-cold"
+          className="modal__label modal__label_type_radio"
+        >
           <input
-            id="cold"
+            id="weather-cold"
             type="radio"
             name="weather"
             checked={values.weather === "cold"}

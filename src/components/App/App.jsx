@@ -65,13 +65,13 @@ function App() {
       .catch((err) => console.error("Error adding item", err));
   };
 
-  const handleDeleteItem = () => {
-    if (!cardToDelete) return;
+  const handleDeleteItem = (card) => {
+    if (!card) return;
 
-    removeCard(cardToDelete._id)
+    removeCard(card.id)
       .then(() => {
         setClothingItems((items) =>
-          items.filter((item) => item._id !== cardToDelete._id),
+          items.filter((item) => item.id !== card.id),
         );
         closeActiveModal();
       })
@@ -131,6 +131,7 @@ function App() {
                   <Profile
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    handleAddClick={handleAddClick} // ← ADD THIS
                   />
                 }
               />
@@ -154,6 +155,7 @@ function App() {
 
           <DeleteConfirmationModal
             isOpen={activeModal === "delete"}
+            selectedCard={cardToDelete}
             onClose={closeActiveModal}
             onConfirm={handleDeleteItem}
           />
