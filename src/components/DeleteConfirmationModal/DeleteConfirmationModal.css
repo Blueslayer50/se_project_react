@@ -1,0 +1,55 @@
+.delete-modal {
+  background: #fff;
+  width: 360px;
+  padding: 32px 28px;
+  border-radius: 12px;
+  position: relative;
+  text-align: center;
+}
+
+.delete-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-modal__title {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.delete-modal__subtitle {
+  font-size: 14px;
+  color: #555;
+  margin: 0 0 24px;
+}
+
+.delete-modal__confirm {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  color: #ff6b00;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.delete-modal__cancel {
+  display: block;
+  width: 100%;
+  padding: 12px 0;
+  background: transparent;
+  border: none;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+}

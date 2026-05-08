@@ -1,8 +1,10 @@
 import { conditionMap } from "./constants";
 
-export const getWeather = ({ latitude, longitude }, apiKey) => {
+const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
+
+export const getWeather = ({ latitude, longitude }) => {
   return fetch(
-    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`,
+    `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${API_KEY}`,
   ).then((res) => {
     if (res.ok) {
       return res.json();
@@ -13,16 +15,22 @@ export const getWeather = ({ latitude, longitude }, apiKey) => {
 };
 
 export const filterWeatherData = (data) => {
-  const temperature = data.main.temp;
-  const condition = normalizeCondition(data.weather[0].main.toLowerCase());
-  const isDaytime = isDay(data.sys, Date.now());
+  const temperatureF = Math.round(data.main.temp);
+  const temperatureC = Math.round(((data.main.temp - 32) * 5) / 9);
+
+  const normalizedCondition = normalizeCondition(
+    data.weather[0].main.toLowerCase(),
+  );
 
   return {
     city: data.name,
-    temp: { F: temperature },
-    type: getWeatherType(temperature),
-    condition,
-    isDay: isDaytime,
+    temp: {
+      F: temperatureF,
+      C: temperatureC,
+    },
+    type: getWeatherType(temperatureF),
+    condition: normalizedCondition,
+    isDay: isDay(data.sys, Date.now()),
   };
 };
 

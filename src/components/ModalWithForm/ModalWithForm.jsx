@@ -4,6 +4,7 @@ function ModalWithForm({
   children,
   buttonText,
   title,
+  name,
   isOpen,
   onClose,
   onSubmit,
@@ -16,7 +17,12 @@ function ModalWithForm({
 
         <button type="button" className="modal__close" onClick={onClose} />
 
-        <form className="modal__form" onSubmit={onSubmit} noValidate>
+        <form
+          className="modal__form"
+          name={name}
+          onSubmit={onSubmit}
+          noValidate
+        >
           {children}
           <button
             type="submit"

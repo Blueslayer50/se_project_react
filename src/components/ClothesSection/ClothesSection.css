@@ -1,0 +1,34 @@
+.clothes-section {
+  display: flex;
+  flex-grow: 1;
+}
+
+.clothes-section__row {
+  display: flex;
+  font-family: CabinetGrotesk, sans-serif;
+}
+
+.clothes-section__items {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  gap: 21px;
+  max-width: 1016px;
+  max-height: 676px;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.clothes-section__your-items {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.clothes-section__add-button {
+  border: none;
+  opacity: 0.6;
+}
