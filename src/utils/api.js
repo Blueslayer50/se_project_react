@@ -4,7 +4,7 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-const handleServerResponse = async (res) => {
+export const checkResponse = async (res) => {
   if (!res.ok) {
     return Promise.reject(`Error: ${res.status}`);
   }
@@ -19,7 +19,7 @@ const handleServerResponse = async (res) => {
 export const getItems = () => {
   return fetch(`${baseUrl}/items`, {
     headers,
-  }).then(handleServerResponse);
+  }).then(checkResponse);
 };
 
 export const addItem = ({ name, imageUrl, weather }) => {
@@ -27,12 +27,12 @@ export const addItem = ({ name, imageUrl, weather }) => {
     method: "POST",
     headers,
     body: JSON.stringify({ name, imageUrl, weather }),
-  }).then(handleServerResponse);
+  }).then(checkResponse);
 };
 
 export const removeCard = (itemID) => {
   return fetch(`${baseUrl}/items/${itemID}`, {
     method: "DELETE",
     headers,
-  }).then(handleServerResponse);
+  }).then(checkResponse);
 };
