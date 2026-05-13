@@ -1,7 +1,8 @@
 import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./AddItemModal.css";
 
-const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
+const AddItemModal = ({ isOpen, onAddItem, onClose, isLoading }) => {
   const defaultValues = {
     name: "",
     imageUrl: "",
@@ -25,6 +26,7 @@ const AddItemModal = ({ isOpen, onAddItem, onClose }) => {
       onClose={onClose}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
+      isLoading={isLoading}
     >
       <label htmlFor="item-name" className="modal__label">
         Name

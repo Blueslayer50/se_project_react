@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   width: 323px;
+  height: 323px;
   font-family: CabinetGrotesk, sans-serif;
 }
 
@@ -12,15 +13,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 72px;
-  height: 24px;
+  width: auto;
+  padding: 4px 12px;
   margin: 0;
-  padding: 4px 8px;
   font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
-  letter-spacing: 0%;
   color: #00000099;
   background-color: #fff;
   border-radius: 4px;
@@ -28,6 +27,8 @@
 
 .card__image {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 16px;
   border: 1px solid rgba(0, 0, 0, 0.3);
 }
@@ -42,5 +43,4 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 100%;
-  letter-spacing: 0%;
 }
