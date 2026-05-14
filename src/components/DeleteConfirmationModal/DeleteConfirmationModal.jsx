@@ -1,3 +1,5 @@
+import "./DeleteConfirmationModal.css";
+
 function DeleteConfirmationModal({
   isOpen,
   onClose,
