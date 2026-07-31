@@ -4,7 +4,13 @@ import ItemCard from "../ItemCard/ItemCard";
 import { useContext } from "react";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherData, clothingItems, handleCardClick }) {
+function Main({
+  weatherData,
+  clothingItems,
+  handleCardClick,
+  onCardLike,
+  isLoggedIn,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
 
   const filteredItems = weatherData.type
@@ -21,15 +27,17 @@ function Main({ weatherData, clothingItems, handleCardClick }) {
           {currentTemperatureUnit === "C"
             ? weatherData.temp.C
             : weatherData.temp.F}{" "}
-          &deg;{currentTemperatureUnit} / You may want to wear:
+          °{currentTemperatureUnit} / You may want to wear:
         </p>
 
         <ul className="cards__list">
           {filteredItems.map((item) => (
             <ItemCard
-              key={`item-${item.id ?? crypto.randomUUID()}`}
+              key={item._id}
               item={item}
               onCardClick={handleCardClick}
+              onCardLike={onCardLike}
+              isLoggedIn={isLoggedIn}
             />
           ))}
         </ul>
