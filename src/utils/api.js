@@ -1,6 +1,6 @@
 const baseUrl = "http://localhost:3001";
 
-const checkResponse = async (res) => {
+export const checkResponse = async (res) => {
   if (!res.ok) {
     return Promise.reject(`Error: ${res.status}`);
   }
