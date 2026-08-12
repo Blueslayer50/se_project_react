@@ -1,15 +1,6 @@
-const baseUrl = "http://localhost:3001";
+import { checkResponse } from "./api";
 
-const checkResponse = async (res) => {
-  if (!res.ok) {
-    return Promise.reject(`Error: ${res.status}`);
-  }
-  try {
-    return await res.json();
-  } catch {
-    return {};
-  }
-};
+const baseUrl = "http://localhost:3001";
 
 export const signup = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {

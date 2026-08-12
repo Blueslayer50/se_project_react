@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+
 import {
   getItems,
   removeCard,
@@ -11,6 +12,7 @@ import * as auth from "../../utils/auth";
 
 import "./App.css";
 import { coordinates } from "../../utils/constants";
+
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -24,6 +26,7 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
+
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -49,9 +52,10 @@ function App() {
   const [cardToDelete, setCardToDelete] = useState(null);
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit((prevUnit) => (prevUnit === "F" ? "C" : "F"));
+    setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
   };
 
   const openModal = (modal) => setActiveModal(modal);
@@ -61,6 +65,20 @@ function App() {
     setSelectedCard(null);
     setCardToDelete(null);
   };
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") closeActiveModal();
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -75,6 +93,8 @@ function App() {
   };
 
   const handleRegister = ({ name, avatar, email, password }) => {
+    setIsLoading(true);
+
     auth
       .signup({ name, avatar, email, password })
       .then(() => auth.signin({ email, password }))
@@ -87,10 +107,13 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleLogin = ({ email, password }) => {
+    setIsLoading(true);
+
     auth
       .signin({ email, password })
       .then((res) => {
@@ -102,7 +125,8 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
@@ -129,6 +153,8 @@ function App() {
   };
 
   const onAddItem = (inputValues, resetForm) => {
+    setIsLoading(true);
+
     const token = localStorage.getItem("jwt");
     const newCardData = {
       name: inputValues.name,
@@ -138,15 +164,19 @@ function App() {
 
     addItem(newCardData, token)
       .then((data) => {
-        setClothingItems((prevItems) => [data, ...prevItems]);
+        setClothingItems((prev) => [data, ...prev]);
         resetForm();
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleDeleteItem = (card) => {
+    setIsLoading(true);
+
     const token = localStorage.getItem("jwt");
+
     removeCard(card._id, token)
       .then(() => {
         setClothingItems((items) =>
@@ -154,14 +184,15 @@ function App() {
         );
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch(console.error)
+      .finally(() => setIsLoading(false));
   };
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    const request = !isLiked
-      ? addCardLike(id, token)
-      : removeCardLike(id, token);
+    const request = isLiked
+      ? removeCardLike(id, token)
+      : addCardLike(id, token);
 
     request
       .then((updatedCard) => {
@@ -232,9 +263,10 @@ function App() {
             </div>
 
             <AddItemModal
-              onClose={closeActiveModal}
               isOpen={activeModal === "new-garment"}
+              onClose={closeActiveModal}
               onAddItem={onAddItem}
+              isLoading={isLoading}
             />
 
             <ItemModal
@@ -250,25 +282,28 @@ function App() {
               selectedCard={cardToDelete}
               onClose={closeActiveModal}
               onConfirm={handleDeleteItem}
+              isLoading={isLoading}
             />
 
             <RegisterModal
               isOpen={activeModal === "register"}
               onClose={closeActiveModal}
               onRegister={handleRegister}
+              isLoading={isLoading}
             />
 
             <LoginModal
               isOpen={activeModal === "login"}
               onClose={closeActiveModal}
               onLogin={handleLogin}
+              isLoading={isLoading}
             />
 
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
-              currentUser={currentUser}
               setCurrentUser={setCurrentUser}
+              isLoading={isLoading}
             />
           </div>
         </BrowserRouter>
