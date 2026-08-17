@@ -1,20 +1,22 @@
-.modal__label {
+.edit-profile__label {
   display: flex;
   flex-direction: column;
+  gap: 8px;
   margin-bottom: 16px;
   font-size: 16px;
+  font-weight: 500;
   color: #000;
 }
 
-.modal__input {
-  margin-top: 8px;
+.edit-profile__input {
   padding: 8px 12px;
   border: 1px solid #000;
   border-radius: 4px;
   font-size: 14px;
+  background-color: #fff;
 }
 
-.modal__submit:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.edit-profile__input:focus {
+  outline: none;
+  border-color: #0a6cff;
 }

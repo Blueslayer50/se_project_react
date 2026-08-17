@@ -25,7 +25,6 @@ export const signin = ({ email, password }) => {
 export const checkToken = (token) => {
   return fetch(`${baseUrl}/users/me`, {
     headers: {
-      "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);

@@ -1,38 +1,46 @@
+import Modal from "../Modal/Modal";
 import "./DeleteConfirmationModal.css";
 
-function DeleteConfirmationModal({
+export default function DeleteConfirmationModal({
   isOpen,
   onClose,
   onConfirm,
   selectedCard,
   isLoading,
 }) {
+  if (!selectedCard) return null;
+
+  const handleDelete = () => {
+    onConfirm(selectedCard);
+  };
+
   return (
-    <div className={`modal ${isOpen ? "modal__opened" : ""}`}>
-      <div className="modal__content">
-        <button type="button" className="modal__close" onClick={onClose} />
-
-        <p className="modal__caption">
+    <Modal name="delete-confirmation" isOpen={isOpen} onClose={onClose}>
+      <div className="delete-modal">
+        <h2 className="delete-modal__title">
           Are you sure you want to delete this item?
-        </p>
+        </h2>
 
-        <div className="modal__footer">
+        <p className="delete-modal__subtitle">This action is irreversible.</p>
+
+        <div className="delete-modal__buttons">
           <button
-            type="button"
-            className="modal__delete-btn"
-            onClick={() => onConfirm(selectedCard)}
+            className="delete-modal__confirm"
+            onClick={handleDelete}
             disabled={isLoading}
           >
-            {isLoading ? "Deleting..." : "Delete"}
+            {isLoading ? "Deleting..." : "Yes, delete item"}
           </button>
 
-          <button type="button" className="modal__cancel-btn" onClick={onClose}>
+          <button
+            className="delete-modal__cancel"
+            onClick={onClose}
+            disabled={isLoading}
+          >
             Cancel
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
-
-export default DeleteConfirmationModal;

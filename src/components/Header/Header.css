@@ -1,48 +1,60 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 32px 0 28px;
-  font-family: "CabinetGrotesk-Medium", sans-serif;
-  margin: 0;
-  gap: 24px;
+  background-color: #0a6cff;
+  padding: 16px 24px;
+  color: #fff;
 }
 
-.header__logo {
-  margin-right: 24px;
+.header__left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.header__date-and-location {
-  margin: 0;
-  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  letter-spacing: 0%;
+.header__date,
+.header__location {
+  font-size: 18px;
+  font-weight: 500;
 }
 
 .header__right {
-  margin-left: auto;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 
-.header__add-clothes-button {
-  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-  border: none;
+.header__button {
+  background: transparent;
+  border: 2px solid #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 16px;
   cursor: pointer;
-  background: none;
-  color: #000000;
 }
 
-.header__user-container {
+.header__button:hover {
+  opacity: 0.8;
+}
+
+.header__profile {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  color: #fff;
 }
 
-.header__username {
-  margin: 0;
-  font-family: "CabinetGrotesk-Bold", Arial, sans-serif;
-  font-weight: 700;
+.header__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header__name {
+  font-size: 18px;
+  font-weight: 600;
 }

@@ -9,11 +9,7 @@ export default function LoginModal({
   onSwitchToRegister,
   isLoading,
 }) {
-  const defaultValues = {
-    email: "",
-    password: "",
-  };
-
+  const defaultValues = { email: "", password: "" };
   const { values, handleChange, isFormValid, setValues } =
     useForm(defaultValues);
 
@@ -33,24 +29,24 @@ export default function LoginModal({
       isFormValid={isFormValid}
       isLoading={isLoading}
     >
-      <label className="login-modal__label">
+      <label className="auth-modal__label">
         Email
         <input
           type="email"
           name="email"
-          className="login-modal__input"
+          className="auth-modal__input"
           value={values.email}
           onChange={handleChange}
           required
         />
       </label>
 
-      <label className="login-modal__label">
+      <label className="auth-modal__label">
         Password
         <input
           type="password"
           name="password"
-          className="login-modal__input"
+          className="auth-modal__input"
           value={values.password}
           onChange={handleChange}
           required
@@ -60,7 +56,7 @@ export default function LoginModal({
 
       <button
         type="button"
-        className="login-modal__switch-button"
+        className="auth-modal__switch-button"
         onClick={onSwitchToRegister}
       >
         or Sign Up

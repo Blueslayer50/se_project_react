@@ -1,31 +1,33 @@
-.modal {
-  position: fixed;
-  inset: 0;
-  background-color: #0000004d;
+.modal-form {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: CabinetGrotesk, sans-serif;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
+  flex-direction: column;
 }
 
-.modal__opened {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
+.modal-form__title {
+  margin: 0 0 24px;
+  font-size: 24px;
+  font-weight: 700;
 }
 
-.modal__content {
-  position: relative;
+.modal-form__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-form__submit {
+  margin-top: 20px;
   width: 100%;
-  max-width: 496px;
-  max-height: 436px;
-  padding: 28px 28px 36px;
-  background-color: #fff;
-  border-radius: 20px;
-  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 8px;
   border: none;
+  background-color: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.modal-form__submit:disabled {
+  opacity: 0.5;
+  cursor: default;
 }

@@ -1,29 +1,42 @@
 import "./Profile.css";
-import ClothesSection from "../ClothesSection/ClothesSection";
-import SideBar from "../SideBar/SideBar";
-import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import ItemCard from "../ItemCard/ItemCard";
 
 export default function Profile({
   clothingItems,
   handleCardClick,
   handleAddClick,
   onEditProfile,
+  onSignOut,
+  isLoggedIn,
 }) {
-  const currentUser = useContext(CurrentUserContext);
-
-  const userItems = clothingItems.filter(
-    (item) => item.owner === currentUser._id,
-  );
-
   return (
     <section className="profile">
-      <SideBar onEditProfile={onEditProfile} />
-      <ClothesSection
-        clothingItems={userItems}
-        handleCardClick={handleCardClick}
-        handleAddClick={handleAddClick}
-      />
+      <div className="profile__header">
+        <button type="button" className="profile__edit" onClick={onEditProfile}>
+          Edit profile
+        </button>
+
+        <button type="button" className="profile__logout" onClick={onSignOut}>
+          Log out
+        </button>
+      </div>
+
+      {isLoggedIn && (
+        <button type="button" className="profile__add" onClick={handleAddClick}>
+          + Add clothes
+        </button>
+      )}
+
+      <ul className="profile__items">
+        {clothingItems.map((item) => (
+          <ItemCard
+            key={item._id}
+            item={item}
+            onCardClick={handleCardClick}
+            isLoggedIn={isLoggedIn}
+          />
+        ))}
+      </ul>
     </section>
   );
 }

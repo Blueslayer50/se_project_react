@@ -2,26 +2,14 @@ import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
 
 export default function ClothesSection({
-  clothingItems = [],
+  clothingItems,
   handleCardClick,
-  handleAddClick,
   onCardLike,
   isLoggedIn,
 }) {
   return (
-    <div className="clothes-section">
-      <div className="clothes-section__row">
-        <p className="clothes-section__your-items">Your Items</p>
-
-        <button
-          className="clothes-section__add-button"
-          onClick={handleAddClick}
-        >
-          + Add new
-        </button>
-      </div>
-
-      <ul className="clothes-section__items">
+    <section className="clothes">
+      <div className="clothes__grid">
         {clothingItems.map((item) => (
           <ItemCard
             key={item._id}
@@ -31,7 +19,7 @@ export default function ClothesSection({
             isLoggedIn={isLoggedIn}
           />
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   );
 }

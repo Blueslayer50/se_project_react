@@ -1,6 +1,7 @@
+import Modal from "../Modal/Modal";
 import "./ModalWithForm.css";
 
-function ModalWithForm({
+export default function ModalWithForm({
   children,
   buttonText,
   title,
@@ -9,16 +10,14 @@ function ModalWithForm({
   onClose,
   onSubmit,
   isFormValid,
+  isLoading,
 }) {
   return (
-    <div className={`modal ${isOpen ? "modal__opened" : ""}`}>
-      <div className="modal__content">
-        <h2 className="modal__title">{title}</h2>
-
-        <button type="button" className="modal__close" onClick={onClose} />
-
+    <Modal name={name} isOpen={isOpen} onClose={onClose}>
+      <div className="modal-form">
+        <h2 className="modal-form__title">{title}</h2>
         <form
-          className="modal__form"
+          className="modal-form__form"
           name={name}
           onSubmit={onSubmit}
           noValidate
@@ -26,15 +25,13 @@ function ModalWithForm({
           {children}
           <button
             type="submit"
-            className="modal__submit"
-            disabled={!isFormValid}
+            className="modal-form__submit"
+            disabled={!isFormValid || isLoading}
           >
             {buttonText}
           </button>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 }
-
-export default ModalWithForm;

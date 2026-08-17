@@ -6,6 +6,7 @@ export default function RegisterModal({
   isOpen,
   onClose,
   onRegister,
+  onSwitchToLogin,
   isLoading,
 }) {
   const defaultValues = {
@@ -34,55 +35,62 @@ export default function RegisterModal({
       isFormValid={isFormValid}
       isLoading={isLoading}
     >
-      <label className="modal__label">
+      <label className="auth-modal__label">
         Name
         <input
           type="text"
           name="name"
-          className="modal__input"
+          className="auth-modal__input"
           value={values.name}
           onChange={handleChange}
           required
-          minLength="2"
         />
       </label>
 
-      <label className="modal__label">
+      <label className="auth-modal__label">
         Avatar URL
         <input
           type="url"
           name="avatar"
-          className="modal__input"
+          className="auth-modal__input"
           value={values.avatar}
           onChange={handleChange}
           required
         />
       </label>
 
-      <label className="modal__label">
+      <label className="auth-modal__label">
         Email
         <input
           type="email"
           name="email"
-          className="modal__input"
+          className="auth-modal__input"
           value={values.email}
           onChange={handleChange}
           required
         />
       </label>
 
-      <label className="modal__label">
+      <label className="auth-modal__label">
         Password
         <input
           type="password"
           name="password"
-          className="modal__input"
+          className="auth-modal__input"
           value={values.password}
           onChange={handleChange}
           required
           minLength="6"
         />
       </label>
+
+      <button
+        type="button"
+        className="auth-modal__switch-button"
+        onClick={onSwitchToLogin}
+      >
+        or Log In
+      </button>
     </ModalWithForm>
   );
 }

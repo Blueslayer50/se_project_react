@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
-
 import {
   getItems,
   removeCard,
   addItem,
   addCardLike,
   removeCardLike,
+  updateUser,
 } from "../../utils/api";
 import * as auth from "../../utils/auth";
 
 import "./App.css";
 import { coordinates } from "../../utils/constants";
-
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
@@ -26,7 +25,6 @@ import LoginModal from "../LoginModal/LoginModal";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 import { getWeather, filterWeatherData } from "../../utils/WeatherApi";
-
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -74,10 +72,7 @@ function App() {
     };
 
     document.addEventListener("keydown", handleEscClose);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
+    return () => document.removeEventListener("keydown", handleEscClose);
   }, [activeModal]);
 
   const handleCardClick = (card) => {
@@ -107,7 +102,7 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error)
+      .catch(() => {})
       .finally(() => setIsLoading(false));
   };
 
@@ -125,7 +120,7 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(console.error)
+      .catch(() => {})
       .finally(() => setIsLoading(false));
   };
 
@@ -156,19 +151,21 @@ function App() {
     setIsLoading(true);
 
     const token = localStorage.getItem("jwt");
-    const newCardData = {
-      name: inputValues.name,
-      imageUrl: inputValues.imageUrl,
-      weather: inputValues.weather,
-    };
 
-    addItem(newCardData, token)
+    addItem(
+      {
+        name: inputValues.name,
+        imageUrl: inputValues.imageUrl,
+        weather: inputValues.weather,
+      },
+      token,
+    )
       .then((data) => {
         setClothingItems((prev) => [data, ...prev]);
         resetForm();
         closeActiveModal();
       })
-      .catch(console.error)
+      .catch(() => {})
       .finally(() => setIsLoading(false));
   };
 
@@ -179,12 +176,10 @@ function App() {
 
     removeCard(card._id, token)
       .then(() => {
-        setClothingItems((items) =>
-          items.filter((item) => item._id !== card._id),
-        );
+        setClothingItems((items) => items.filter((i) => i._id !== card._id));
         closeActiveModal();
       })
-      .catch(console.error)
+      .catch(() => {})
       .finally(() => setIsLoading(false));
   };
 
@@ -200,17 +195,33 @@ function App() {
           cards.map((item) => (item._id === id ? updatedCard : item)),
         );
       })
-      .catch(console.error);
+      .catch(() => {});
+  };
+
+  const handleEditProfile = (values) => {
+    setIsLoading(true);
+    const token = localStorage.getItem("jwt");
+
+    updateUser(values, token)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+        closeActiveModal();
+      })
+      .finally(() => setIsLoading(false));
   };
 
   useEffect(() => {
     getWeather(coordinates)
       .then((data) => setWeatherData(filterWeatherData(data)))
-      .catch(console.error);
+      .catch(() => {});
 
-    getItems()
-      .then((data) => setClothingItems([...data].reverse()))
-      .catch(console.error);
+    const token = localStorage.getItem("jwt");
+
+    if (token) {
+      getItems(token)
+        .then((data) => setClothingItems([...data].reverse()))
+        .catch(() => {});
+    }
   }, []);
 
   return (
@@ -227,7 +238,7 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 onLoginClick={() => openModal("login")}
                 onRegisterClick={() => openModal("register")}
-                onSignOut={handleSignOut}
+                currentUser={currentUser}
               />
 
               <Routes>
@@ -249,10 +260,14 @@ function App() {
                   element={
                     <ProtectedRoute isLoggedIn={isLoggedIn}>
                       <Profile
-                        clothingItems={clothingItems}
+                        clothingItems={clothingItems.filter(
+                          (item) => item.owner === currentUser._id,
+                        )}
                         handleCardClick={handleCardClick}
                         handleAddClick={handleAddClick}
                         onEditProfile={() => openModal("edit-profile")}
+                        onSignOut={handleSignOut}
+                        isLoggedIn={isLoggedIn}
                       />
                     </ProtectedRoute>
                   }
@@ -263,8 +278,8 @@ function App() {
             </div>
 
             <AddItemModal
-              isOpen={activeModal === "new-garment"}
               onClose={closeActiveModal}
+              isOpen={activeModal === "new-garment"}
               onAddItem={onAddItem}
               isLoading={isLoading}
             />
@@ -275,6 +290,7 @@ function App() {
               onClose={closeActiveModal}
               onDeleteClick={openDeleteModal}
               isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
             />
 
             <DeleteConfirmationModal
@@ -290,6 +306,7 @@ function App() {
               onClose={closeActiveModal}
               onRegister={handleRegister}
               isLoading={isLoading}
+              onSwitchToLogin={() => openModal("login")}
             />
 
             <LoginModal
@@ -297,12 +314,13 @@ function App() {
               onClose={closeActiveModal}
               onLogin={handleLogin}
               isLoading={isLoading}
+              onSwitchToRegister={() => openModal("register")}
             />
 
             <EditProfileModal
               isOpen={activeModal === "edit-profile"}
               onClose={closeActiveModal}
-              setCurrentUser={setCurrentUser}
+              onEditProfile={handleEditProfile}
               isLoading={isLoading}
             />
           </div>

@@ -1,32 +1,37 @@
 import "./ItemModal.css";
-import { useContext } from "react";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function ItemModal({ activeModal, onClose, card, onDeleteClick, isLoggedIn }) {
-  const currentUser = useContext(CurrentUserContext);
+export default function ItemModal({
+  activeModal,
+  card,
+  onClose,
+  onDeleteClick,
+  isLoggedIn,
+  currentUser,
+}) {
+  if (!card) return null;
 
-  if (!card || !card._id) return null;
-
-  const isOpen = activeModal === "preview";
-  const isOwn = card.owner === currentUser._id;
+  const isOwner = isLoggedIn && card.owner === currentUser._id;
 
   return (
-    <div className={`modal ${isOpen ? "modal__opened" : ""}`}>
-      <div className="modal__content modal__content_type_image">
+    <div
+      className={`modal modal_type_preview ${
+        activeModal === "preview" ? "modal_opened" : ""
+      }`}
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
+      <div className="modal__container-preview">
         <button type="button" className="modal__close" onClick={onClose} />
 
         <img src={card.imageUrl} alt={card.name} className="modal__image" />
 
-        <div className="modal__footer">
-          <div className="modal__left-content">
-            <h2 className="modal__caption">{card.name}</h2>
-            <p className="modal__weather">Weather: {card.weather}</p>
-          </div>
+        <div className="modal__info">
+          <p className="modal__name">{card.name}</p>
+          <p className="modal__weather">Weather: {card.weather}</p>
 
-          {isLoggedIn && isOwn && (
+          {isOwner && (
             <button
               type="button"
-              className="modal__delete-btn"
+              className="modal__delete-button"
               onClick={() => onDeleteClick(card)}
             >
               Delete item
@@ -37,5 +42,3 @@ function ItemModal({ activeModal, onClose, card, onDeleteClick, isLoggedIn }) {
     </div>
   );
 }
-
-export default ItemModal;
