@@ -35,48 +35,48 @@ export default function RegisterModal({
       isFormValid={isFormValid}
       isLoading={isLoading}
     >
-      <label className="auth-modal__label">
+      <label className="modal__label">
         Name
         <input
           type="text"
           name="name"
-          className="auth-modal__input"
+          className="modal__input"
           value={values.name}
           onChange={handleChange}
           required
         />
       </label>
 
-      <label className="auth-modal__label">
+      <label className="modal__label">
         Avatar URL
         <input
           type="url"
           name="avatar"
-          className="auth-modal__input"
+          className="modal__input"
           value={values.avatar}
           onChange={handleChange}
           required
         />
       </label>
 
-      <label className="auth-modal__label">
+      <label className="modal__label">
         Email
         <input
           type="email"
           name="email"
-          className="auth-modal__input"
+          className="modal__input"
           value={values.email}
           onChange={handleChange}
           required
         />
       </label>
 
-      <label className="auth-modal__label">
+      <label className="modal__label">
         Password
         <input
           type="password"
           name="password"
-          className="auth-modal__input"
+          className="modal__input"
           value={values.password}
           onChange={handleChange}
           required
@@ -86,7 +86,7 @@ export default function RegisterModal({
 
       <button
         type="button"
-        className="auth-modal__switch-button"
+        className="modal__switch-button"
         onClick={onSwitchToLogin}
       >
         or Log In

@@ -14,30 +14,32 @@ export default function ItemModal({
 
   return (
     <div
-      className={`modal modal_type_preview ${
-        activeModal === "preview" ? "modal_opened" : ""
+      className={`item-modal-overlay ${
+        activeModal === "preview" ? "item-modal-overlay_opened" : ""
       }`}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="modal__container-preview">
-        <button type="button" className="modal__close" onClick={onClose} />
+      <div className="item-modal">
+        <button type="button" className="item-modal__close" onClick={onClose} />
 
-        <img src={card.imageUrl} alt={card.name} className="modal__image" />
+        <img
+          src={card.imageUrl}
+          alt={card.name}
+          className="item-modal__image"
+        />
 
-        <div className="modal__info">
-          <p className="modal__name">{card.name}</p>
-          <p className="modal__weather">Weather: {card.weather}</p>
+        <p className="item-modal__title">{card.name}</p>
+        <p className="item-modal__weather">Weather: {card.weather}</p>
 
-          {isOwner && (
-            <button
-              type="button"
-              className="modal__delete-button"
-              onClick={() => onDeleteClick(card)}
-            >
-              Delete item
-            </button>
-          )}
-        </div>
+        {isOwner && (
+          <button
+            type="button"
+            className="item-modal__delete"
+            onClick={() => onDeleteClick(card)}
+          >
+            Delete item
+          </button>
+        )}
       </div>
     </div>
   );

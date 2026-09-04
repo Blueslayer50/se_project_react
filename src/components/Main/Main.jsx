@@ -19,7 +19,10 @@ function Main({
 
   return (
     <main className="main">
-      <WeatherCard weatherData={weatherData} />
+      <WeatherCard
+        weatherData={weatherData}
+        currentTemperatureUnit={currentTemperatureUnit}
+      />
 
       <section className="cards">
         <p className="cards__text">

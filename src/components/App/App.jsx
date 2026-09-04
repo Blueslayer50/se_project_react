@@ -265,6 +265,7 @@ function App() {
                         )}
                         handleCardClick={handleCardClick}
                         handleAddClick={handleAddClick}
+                        onCardLike={handleCardLike}
                         onEditProfile={() => openModal("edit-profile")}
                         onSignOut={handleSignOut}
                         isLoggedIn={isLoggedIn}

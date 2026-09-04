@@ -1,42 +1,42 @@
 import "./Profile.css";
-import ItemCard from "../ItemCard/ItemCard";
+import Sidebar from "../Sidebar/Sidebar";
+import ClothesSection from "../ClothesSection/ClothesSection";
 
 export default function Profile({
   clothingItems,
   handleCardClick,
   handleAddClick,
+  onCardLike,
   onEditProfile,
   onSignOut,
   isLoggedIn,
 }) {
   return (
     <section className="profile">
-      <div className="profile__header">
-        <button type="button" className="profile__edit" onClick={onEditProfile}>
-          Edit profile
-        </button>
+      <Sidebar onEditProfile={onEditProfile} onSignOut={onSignOut} />
 
-        <button type="button" className="profile__logout" onClick={onSignOut}>
-          Log out
-        </button>
+      <div className="profile__content">
+        <div className="profile__header">
+          <h1 className="profile__title">Your items</h1>
+
+          {isLoggedIn && (
+            <button
+              type="button"
+              className="clothes-section__add-button"
+              onClick={handleAddClick}
+            >
+              + Add new
+            </button>
+          )}
+        </div>
+
+        <ClothesSection
+          clothingItems={clothingItems}
+          handleCardClick={handleCardClick}
+          onCardLike={onCardLike}
+          isLoggedIn={isLoggedIn}
+        />
       </div>
-
-      {isLoggedIn && (
-        <button type="button" className="profile__add" onClick={handleAddClick}>
-          + Add clothes
-        </button>
-      )}
-
-      <ul className="profile__items">
-        {clothingItems.map((item) => (
-          <ItemCard
-            key={item._id}
-            item={item}
-            onCardClick={handleCardClick}
-            isLoggedIn={isLoggedIn}
-          />
-        ))}
-      </ul>
     </section>
   );
 }

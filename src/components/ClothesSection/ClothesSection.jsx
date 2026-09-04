@@ -8,8 +8,12 @@ export default function ClothesSection({
   isLoggedIn,
 }) {
   return (
-    <section className="clothes">
-      <div className="clothes__grid">
+    <section className="clothes-section">
+      <div className="clothes-section__row">
+        <p className="clothes-section__your-items">Your items</p>
+      </div>
+
+      <ul className="clothes-section__items">
         {clothingItems.map((item) => (
           <ItemCard
             key={item._id}
@@ -19,7 +23,7 @@ export default function ClothesSection({
             isLoggedIn={isLoggedIn}
           />
         ))}
-      </div>
+      </ul>
     </section>
   );
 }
