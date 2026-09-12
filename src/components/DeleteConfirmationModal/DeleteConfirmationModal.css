@@ -1,55 +1,49 @@
 .delete-modal {
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: center;
-  gap: 16px;
-  padding: 24px 0 8px;
+  gap: 24px;
+  padding: 16px 8px 0;
 }
 
-.delete-modal__title {
-  font-size: 22px;
+.delete-modal__text {
+  font-size: 20px;
   font-weight: 700;
   margin: 0;
-}
-
-.delete-modal__subtitle {
-  font-size: 16px;
-  color: #555;
-  margin: 0;
+  line-height: 1.4;
 }
 
 .delete-modal__buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 12px;
+}
+
+.delete-modal__confirm,
+.delete-modal__cancel {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .delete-modal__confirm {
-  padding: 12px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
+  color: #e8600a;
+}
+.delete-modal__cancel {
+  color: #000;
 }
 
-.delete-modal__confirm:disabled {
-  opacity: 0.6;
+.delete-modal__confirm:disabled,
+.delete-modal__cancel:disabled {
+  opacity: 0.5;
   cursor: default;
 }
 
-.delete-modal__cancel {
-  padding: 12px;
-  background-color: #e6e6e6;
-  color: #000;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
+.delete-modal__confirm:hover,
 .delete-modal__cancel:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }

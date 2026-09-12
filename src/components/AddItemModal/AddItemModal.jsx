@@ -34,6 +34,7 @@ export default function AddItemModal({
           type="text"
           name="name"
           className="modal__input"
+          placeholder="Name"
           value={values.name}
           onChange={handleChange}
           required
@@ -41,11 +42,12 @@ export default function AddItemModal({
       </label>
 
       <label className="modal__label">
-        Image (Image URL)
+        Image
         <input
           type="url"
           name="imageUrl"
           className="modal__input"
+          placeholder="Image URL"
           value={values.imageUrl}
           onChange={handleChange}
           required

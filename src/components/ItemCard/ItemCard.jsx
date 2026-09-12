@@ -11,31 +11,23 @@ export default function ItemCard({
   const currentUser = useContext(CurrentUserContext);
   const isLiked = item.likes?.includes(currentUser._id);
 
-  const handleLike = () => {
-    if (!isLoggedIn) return;
-    onCardLike({ id: item._id, isLiked });
-  };
-
   return (
-    <div className="item-card">
-      <img
-        src={item.imageUrl}
-        alt={item.name}
-        className="item-card__image"
-        onClick={() => onCardClick(item)}
-      />
+    <li className="item-card" onClick={() => onCardClick(item)}>
+      <span className="item-card__name">{item.name}</span>
 
-      <div className="item-card__footer">
-        <p className="item-card__name">{item.name}</p>
+      {isLoggedIn && (
+        <button
+          type="button"
+          className={`item-card__like ${isLiked ? "item-card__like_active" : ""}`}
+          onClick={(e) => {
+            e.stopPropagation();
+            onCardLike({ id: item._id, isLiked });
+          }}
+          aria-label="Like item"
+        />
+      )}
 
-        {isLoggedIn && (
-          <button
-            type="button"
-            className={`item-card__like ${isLiked ? "item-card__like_active" : ""}`}
-            onClick={handleLike}
-          />
-        )}
-      </div>
-    </div>
+      <img src={item.imageUrl} alt={item.name} className="item-card__image" />
+    </li>
   );
 }

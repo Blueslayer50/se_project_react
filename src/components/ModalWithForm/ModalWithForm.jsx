@@ -11,9 +11,10 @@ export default function ModalWithForm({
   onSubmit,
   isFormValid,
   isLoading,
+  switchButton,
 }) {
   return (
-    <Modal name={name} isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className="modal-form">
         <h2 className="modal-form__title">{title}</h2>
         <form
@@ -23,13 +24,16 @@ export default function ModalWithForm({
           noValidate
         >
           {children}
-          <button
-            type="submit"
-            className="modal-form__submit"
-            disabled={!isFormValid || isLoading}
-          >
-            {buttonText}
-          </button>
+          <div className="modal-form__actions">
+            <button
+              type="submit"
+              className="modal-form__submit"
+              disabled={!isFormValid || isLoading}
+            >
+              {buttonText}
+            </button>
+            {switchButton}
+          </div>
         </form>
       </div>
     </Modal>

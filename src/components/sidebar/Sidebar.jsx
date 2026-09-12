@@ -15,15 +15,10 @@ export default function Sidebar({ onEditProfile, onSignOut }) {
         />
         <p className="sidebar__name">{currentUser.name}</p>
       </div>
-
-      <button className="sidebar__button" onClick={onEditProfile}>
+      <button type="button" className="sidebar__link" onClick={onEditProfile}>
         Change profile data
       </button>
-
-      <button
-        className="sidebar__button sidebar__button_logout"
-        onClick={onSignOut}
-      >
+      <button type="button" className="sidebar__link" onClick={onSignOut}>
         Log out
       </button>
     </aside>

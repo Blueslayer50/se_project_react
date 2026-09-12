@@ -8,14 +8,9 @@ export default function RegisterModal({
   onRegister,
   onSwitchToLogin,
   isLoading,
+  errorMessage,
 }) {
-  const defaultValues = {
-    name: "",
-    avatar: "",
-    email: "",
-    password: "",
-  };
-
+  const defaultValues = { email: "", password: "", name: "", avatar: "" };
   const { values, handleChange, isFormValid, setValues } =
     useForm(defaultValues);
 
@@ -34,37 +29,23 @@ export default function RegisterModal({
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
       isLoading={isLoading}
+      switchButton={
+        <button
+          type="button"
+          className="modal__switch-button"
+          onClick={onSwitchToLogin}
+        >
+          or Log In
+        </button>
+      }
     >
       <label className="modal__label">
-        Name
-        <input
-          type="text"
-          name="name"
-          className="modal__input"
-          value={values.name}
-          onChange={handleChange}
-          required
-        />
-      </label>
-
-      <label className="modal__label">
-        Avatar URL
-        <input
-          type="url"
-          name="avatar"
-          className="modal__input"
-          value={values.avatar}
-          onChange={handleChange}
-          required
-        />
-      </label>
-
-      <label className="modal__label">
-        Email
+        Email*
         <input
           type="email"
           name="email"
           className="modal__input"
+          placeholder="Email"
           value={values.email}
           onChange={handleChange}
           required
@@ -72,11 +53,12 @@ export default function RegisterModal({
       </label>
 
       <label className="modal__label">
-        Password
+        Password*
         <input
           type="password"
           name="password"
           className="modal__input"
+          placeholder="Password"
           value={values.password}
           onChange={handleChange}
           required
@@ -84,13 +66,33 @@ export default function RegisterModal({
         />
       </label>
 
-      <button
-        type="button"
-        className="modal__switch-button"
-        onClick={onSwitchToLogin}
-      >
-        or Log In
-      </button>
+      <label className="modal__label">
+        Name *
+        <input
+          type="text"
+          name="name"
+          className="modal__input"
+          placeholder="Name"
+          value={values.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      <label className="modal__label">
+        Avatar URL *
+        <input
+          type="url"
+          name="avatar"
+          className="modal__input"
+          placeholder="Avatar URL"
+          value={values.avatar}
+          onChange={handleChange}
+          required
+        />
+      </label>
+
+      {errorMessage && <p className="modal__error">{errorMessage}</p>}
     </ModalWithForm>
   );
 }

@@ -10,29 +10,26 @@ export default function DeleteConfirmationModal({
 }) {
   if (!selectedCard) return null;
 
-  const handleDelete = () => {
-    onConfirm(selectedCard);
-  };
-
   return (
-    <Modal name="delete-confirmation" isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className="delete-modal">
-        <h2 className="delete-modal__title">
+        <p className="delete-modal__text">
           Are you sure you want to delete this item?
-        </h2>
-
-        <p className="delete-modal__subtitle">This action is irreversible.</p>
+          <br />
+          This action is irreversible.
+        </p>
 
         <div className="delete-modal__buttons">
           <button
+            type="button"
             className="delete-modal__confirm"
-            onClick={handleDelete}
+            onClick={() => onConfirm(selectedCard)}
             disabled={isLoading}
           >
             {isLoading ? "Deleting..." : "Yes, delete item"}
           </button>
-
           <button
+            type="button"
             className="delete-modal__cancel"
             onClick={onClose}
             disabled={isLoading}

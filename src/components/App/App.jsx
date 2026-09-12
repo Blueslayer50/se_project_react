@@ -48,6 +48,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState(null);
   const [cardToDelete, setCardToDelete] = useState(null);
+  const [authError, setAuthError] = useState("");
 
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [isLoading, setIsLoading] = useState(false);
@@ -56,12 +57,16 @@ function App() {
     setCurrentTemperatureUnit((prev) => (prev === "F" ? "C" : "F"));
   };
 
-  const openModal = (modal) => setActiveModal(modal);
+  const openModal = (modal) => {
+    setAuthError("");
+    setActiveModal(modal);
+  };
 
   const closeActiveModal = () => {
     setActiveModal("");
     setSelectedCard(null);
     setCardToDelete(null);
+    setAuthError("");
   };
 
   useEffect(() => {
@@ -89,6 +94,7 @@ function App() {
 
   const handleRegister = ({ name, avatar, email, password }) => {
     setIsLoading(true);
+    setAuthError("");
 
     auth
       .signup({ name, avatar, email, password })
@@ -102,12 +108,13 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(() => {})
+      .catch(() => setAuthError("This email is already registered"))
       .finally(() => setIsLoading(false));
   };
 
   const handleLogin = ({ email, password }) => {
     setIsLoading(true);
+    setAuthError("");
 
     auth
       .signin({ email, password })
@@ -120,7 +127,7 @@ function App() {
         setIsLoggedIn(true);
         closeActiveModal();
       })
-      .catch(() => {})
+      .catch(() => setAuthError("Email or password incorrect"))
       .finally(() => setIsLoading(false));
   };
 
@@ -207,6 +214,7 @@ function App() {
         setCurrentUser(updatedUser);
         closeActiveModal();
       })
+      .catch(() => {})
       .finally(() => setIsLoading(false));
   };
 
@@ -238,7 +246,6 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 onLoginClick={() => openModal("login")}
                 onRegisterClick={() => openModal("register")}
-                currentUser={currentUser}
               />
 
               <Routes>
@@ -308,6 +315,7 @@ function App() {
               onRegister={handleRegister}
               isLoading={isLoading}
               onSwitchToLogin={() => openModal("login")}
+              errorMessage={authError}
             />
 
             <LoginModal
@@ -316,6 +324,7 @@ function App() {
               onLogin={handleLogin}
               isLoading={isLoading}
               onSwitchToRegister={() => openModal("register")}
+              errorMessage={authError}
             />
 
             <EditProfileModal

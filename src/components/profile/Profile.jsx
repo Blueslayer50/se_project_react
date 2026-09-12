@@ -14,29 +14,13 @@ export default function Profile({
   return (
     <section className="profile">
       <Sidebar onEditProfile={onEditProfile} onSignOut={onSignOut} />
-
-      <div className="profile__content">
-        <div className="profile__header">
-          <h1 className="profile__title">Your items</h1>
-
-          {isLoggedIn && (
-            <button
-              type="button"
-              className="clothes-section__add-button"
-              onClick={handleAddClick}
-            >
-              + Add new
-            </button>
-          )}
-        </div>
-
-        <ClothesSection
-          clothingItems={clothingItems}
-          handleCardClick={handleCardClick}
-          onCardLike={onCardLike}
-          isLoggedIn={isLoggedIn}
-        />
-      </div>
+      <ClothesSection
+        clothingItems={clothingItems}
+        handleCardClick={handleCardClick}
+        handleAddClick={handleAddClick}
+        onCardLike={onCardLike}
+        isLoggedIn={isLoggedIn}
+      />
     </section>
   );
 }

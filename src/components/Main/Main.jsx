@@ -25,13 +25,13 @@ function Main({
       />
 
       <section className="cards">
-        <p className="cards__text">
+        <h1 className="cards__text">
           Today is{" "}
           {currentTemperatureUnit === "C"
             ? weatherData.temp.C
             : weatherData.temp.F}{" "}
           °{currentTemperatureUnit} / You may want to wear:
-        </p>
+        </h1>
 
         <ul className="cards__list">
           {filteredItems.map((item) => (

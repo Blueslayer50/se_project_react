@@ -9,37 +9,42 @@ export default function ItemModal({
   currentUser,
 }) {
   if (!card) return null;
-
   const isOwner = isLoggedIn && card.owner === currentUser._id;
 
   return (
     <div
-      className={`item-modal-overlay ${
-        activeModal === "preview" ? "item-modal-overlay_opened" : ""
-      }`}
+      className={`item-modal-overlay ${activeModal === "preview" ? "item-modal-overlay_opened" : ""}`}
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
       <div className="item-modal">
-        <button type="button" className="item-modal__close" onClick={onClose} />
-
-        <img
-          src={card.imageUrl}
-          alt={card.name}
-          className="item-modal__image"
+        <button
+          type="button"
+          className="item-modal__close"
+          onClick={onClose}
+          aria-label="Close"
         />
 
-        <p className="item-modal__title">{card.name}</p>
-        <p className="item-modal__weather">Weather: {card.weather}</p>
+        <div className="item-modal__image-wrapper">
+          <span className="item-modal__name">{card.name}</span>
+          <img
+            src={card.imageUrl}
+            alt={card.name}
+            className="item-modal__image"
+          />
+        </div>
 
-        {isOwner && (
-          <button
-            type="button"
-            className="item-modal__delete"
-            onClick={() => onDeleteClick(card)}
-          >
-            Delete item
-          </button>
-        )}
+        <div className="item-modal__info">
+          <p className="item-modal__weather">Weather: {card.weather}</p>
+          {isOwner && (
+            <button
+              type="button"
+              className="item-modal__delete"
+              onClick={() => onDeleteClick(card)}
+            >
+              Delete item
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
